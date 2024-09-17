@@ -1,3 +1,13 @@
+variable "access_key" {
+  description = "AWS Access Key"
+  type        = string
+}
+
+variable "secret_key" {
+  description = "AWS Secret Key"
+  type        = string
+}
+
 variable "region" {
   description = "The AWS region to deploy the resources in"
   type        = string
