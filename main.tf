@@ -3,9 +3,18 @@ provider "aws" {
     access_key = var.access_key
     secret_key = var.secret_key
   }
+
   
+  terraform {
+    backend "s3" {
+      bucket         = "terraform-state-tech-challenge"
+      key            = "rds/terraform.tfstate"
+      region         = "us-east-1"
+    }
+  }
+
   resource "aws_security_group" "aurora_sg" {
-    name        = "aurora-sec-group"
+    name        = "tch-aurora-sec-grp"
     description = "Allow MySQL traffic"
     vpc_id      = var.vpc_id
   
@@ -25,12 +34,12 @@ provider "aws" {
     }
   
     tags = {
-      Name = "aurora-sec-group-tc"
+      Name = "aurora-sec-grp-tc"
     }
   }
   
   resource "aws_db_subnet_group" "aurora_subnet_group" {
-    name       = "aurora-subnt-group"
+    name       = "tch-aurora-subnt-grp"
     subnet_ids = var.subnet_ids
     tags = {
       Name = "aurora-subnet-group"
@@ -58,7 +67,7 @@ provider "aws" {
   
   # Aurora Cluster Instance
   resource "aws_rds_cluster_instance" "aurora_instance" {
-    identifier              = "aurora-cluster-instance-1"
+    identifier              = "aurora-cluster-instance-2"
     cluster_identifier      = aws_rds_cluster.aurora_cluster.id
     instance_class          = "db.t3.medium"
     engine                  = aws_rds_cluster.aurora_cluster.engine
