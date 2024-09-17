@@ -8,6 +8,12 @@ variable "secret_key" {
   type        = string
 }
 
+variable "tf_bucket" {
+  description = "Bucket to Store the state file"
+  type        = string
+  default     = "terraform-state-tech-challenge"
+}
+
 variable "region" {
   description = "The AWS region to deploy the resources in"
   type        = string
