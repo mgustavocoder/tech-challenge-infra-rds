@@ -33,14 +33,5 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
-
-      - name: Apply Plan (manual approval)
-        if: github.event.inputs.action == 'apply'
-        run: terraform apply -auto-approve tfplan
-
-      - name: Destroy Resources (manual approval)
-        if: github.event.inputs.action == 'destroy'
+      - name: Destroy Resources
         run: terraform destroy -auto-approve
