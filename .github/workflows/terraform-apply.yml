@@ -37,5 +37,5 @@ jobs:
         id: plan
         run: terraform plan
 
-      - name: Apply Plan (manual approval)
-        run: terraform apply -auto-approve tfplan
+      - name: Apply
+        run: terraform apply -auto-approve
