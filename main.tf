@@ -10,8 +10,6 @@ provider "aws" {
       bucket         = "terraform-state-tech-challenge"
       key            = "rds.tfstate"
       region         = "us-east-1"
-      access_key     = var.access_key
-      secret_key     = var.secret_key
     }
   }
 
