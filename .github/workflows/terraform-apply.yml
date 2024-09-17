@@ -16,6 +16,7 @@ jobs:
       TF_VAR_region: ${{ secrets.DB_REGION }} 
       TF_VAR_vpc_id: ${{ secrets.DB_VPC }} 
       TF_VAR_subnet_ids: ${{ secrets.DB_SUBNET_IDS }}
+      TF_VAR_tf_bucket: ${{ secrets.TF_BUCKET }}
 
     defaults:
       run:
