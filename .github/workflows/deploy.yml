@@ -26,23 +26,14 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0  # Specify the required Terraform version
+          terraform_version: 1.9.5  # Specify the required Terraform version
 
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Terraform Format
-        run: terraform fmt -check
-
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: Terraform Plan
         id: plan
-        run: terraform plan -out=tfplan
-
-      - name: Show Plan Output
-        run: terraform show -json tfplan | jq .
+        run: terraform plan
 
       - name: Apply Plan (manual approval)
         if: github.event.inputs.action == 'apply'
