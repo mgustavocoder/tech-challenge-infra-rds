@@ -1,4 +1,4 @@
-name: Terraform
+name: Terraform Manual CI/CD
 
 on:
   workflow_dispatch:  # Allows manual trigger
@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
+      TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
+      TF_VAR_secret_key: ${{ secrets.SECRET_KEY }}
       TF_VAR_master_username: ${{ secrets.DB_USER_NAME }}
       TF_VAR_master_password: ${{ secrets.DB_USER_PASSWORD }}
       TF_VAR_region: ${{ secrets.DB_REGION }} 
