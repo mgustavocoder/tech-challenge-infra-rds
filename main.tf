@@ -5,7 +5,7 @@ provider "aws" {
   }
   
   resource "aws_security_group" "aurora_sg" {
-    name        = "tc-aurora-security-group"
+    name        = "aurora-security-group-tc"
     description = "Allow MySQL traffic"
     vpc_id      = var.vpc_id
   
@@ -25,15 +25,15 @@ provider "aws" {
     }
   
     tags = {
-      Name = "tc-aurora-security-group"
+      Name = "aurora-security-group-tc"
     }
   }
   
   resource "aws_db_subnet_group" "aurora_subnet_group" {
-    name       = "tc-aurora-subnet-group"
+    name       = "aurora-subnet-group-tc"
     subnet_ids = var.subnet_ids
     tags = {
-      Name = "tc-aurora-subnet-group"
+      Name = "aurora-subnet-group-tc"
     }
   }
   
@@ -52,7 +52,7 @@ provider "aws" {
     apply_immediately       = true
   
     tags = {
-      Name = "tc-aurora-cluster"
+      Name = "aurora-cluster-tc"
     }
   }
   
