@@ -27,7 +27,7 @@ variable "subnet_ids" {
 variable "cluster_identifier" {
   description = "The identifier for the Aurora MySQL cluster"
   type        = string
-  default     = "tc-postech-fiap"
+  default     = "postech-fiap-tc"
 }
 
 variable "master_username" {
