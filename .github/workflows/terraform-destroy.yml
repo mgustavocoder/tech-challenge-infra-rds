@@ -1,0 +1,46 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  terraform:
+    name: 'Terraform and Destroy'
+    runs-on: ubuntu-latest
+    
+    env:
+      TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
+      TF_VAR_secret_key: ${{ secrets.SECRET_KEY }}
+      TF_VAR_master_username: ${{ secrets.DB_USER_NAME }}
+      TF_VAR_master_password: ${{ secrets.DB_USER_PASSWORD }}
+      TF_VAR_region: ${{ secrets.DB_REGION }} 
+      TF_VAR_vpc_id: ${{ secrets.DB_VPC }} 
+      TF_VAR_subnet_ids: ${{ secrets.DB_SUBNET_IDS }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.5  # Specify the required Terraform version
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+
+      - name: Apply Plan (manual approval)
+        if: github.event.inputs.action == 'apply'
+        run: terraform apply -auto-approve tfplan
+
+      - name: Destroy Resources (manual approval)
+        if: github.event.inputs.action == 'destroy'
+        run: terraform destroy -auto-approve

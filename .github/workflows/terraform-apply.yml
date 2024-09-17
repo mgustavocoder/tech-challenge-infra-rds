@@ -1,11 +1,11 @@
-name: Terraform Manual CI/CD
+name: Terraform Plan and Apply
 
 on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
   terraform:
-    name: 'Terraform Plan, Apply, and Destroy'
+    name: 'Terraform Plan, Apply'
     runs-on: ubuntu-latest
     
     env:
@@ -38,9 +38,4 @@ jobs:
         run: terraform plan
 
       - name: Apply Plan (manual approval)
-        if: github.event.inputs.action == 'apply'
         run: terraform apply -auto-approve tfplan
-
-      - name: Destroy Resources (manual approval)
-        if: github.event.inputs.action == 'destroy'
-        run: terraform destroy -auto-approve
