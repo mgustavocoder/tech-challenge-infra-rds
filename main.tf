@@ -14,7 +14,7 @@ provider "aws" {
   }
 
   resource "aws_security_group" "aurora_sg" {
-    name        = "tch-aurora-sec-grp"
+    name        = "${var.cluster_identifier}-sec-grp"
     description = "Allow MySQL traffic"
     vpc_id      = var.vpc_id
   
@@ -39,7 +39,7 @@ provider "aws" {
   }
   
   resource "aws_db_subnet_group" "aurora_subnet_group" {
-    name       = "tch-aurora-subnt-grp"
+    name       = "${var.cluster_identifier}-subnt-grp"
     subnet_ids = var.subnet_ids
     tags = {
       Name = "aurora-subnet-group"
@@ -67,7 +67,7 @@ provider "aws" {
   
   # Aurora Cluster Instance
   resource "aws_rds_cluster_instance" "aurora_instance" {
-    identifier              = "aurora-cluster-instance-2"
+    identifier              = "${var.cluster_identifier}-instance"
     cluster_identifier      = aws_rds_cluster.aurora_cluster.id
     instance_class          = "db.t3.medium"
     engine                  = aws_rds_cluster.aurora_cluster.engine
