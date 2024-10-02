@@ -5,3 +5,5 @@ Para conseguir rodar o deployment via Github Actions, é necessário criar as se
 
 O trigger do pipeline de deployment é manual, e roda considerando a branch main.
 <img width="337" alt="Captura de Tela 2024-10-02 às 13 30 01" src="https://github.com/user-attachments/assets/d59865a9-18ea-4582-a059-c3494268418c">
+
+Para se criar o banco de dados e as tabelas, é necessário conectar-se ao banco de dados e rodar a sequência de SQL do arquivo script.sql, contido nesse repositório.
